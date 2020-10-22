@@ -13,3 +13,6 @@ s3:
 		--parameter-overrides \
 		Prefix=$(PREFIX) \
 		Environment=$(ENV)
+
+clear:
+	aws cloudformation --profile $(PROFILE) delete-stack --stack-name $(PREFIX)-$(ENV)-s3

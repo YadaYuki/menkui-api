@@ -17,16 +17,14 @@ Parameters:
 Resources:
   ServerlessBucket:
     Type: AWS::S3::Bucket
-    DeletionPolicy: Retain
     Properties:
       BucketName: !Join ["-",[!Ref Prefix, !Ref Env, "serverless"]]
-      AccessControl: PublicRead
     
   ServerlessImageBucket: 
     Type: AWS::S3::Bucket
-    DeletionPolicy: Retain
     Properties:
       BucketName: !Join ["-",[!Ref Prefix, !Ref Env, "serverless-image"]]
+      AccessControl: PublicRead
 
 Outputs:
   ServerlessBucket:

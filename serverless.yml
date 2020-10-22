@@ -12,53 +12,41 @@ service: menkui-api
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
+custom:
+  stage: ${opt:stage,self:provider.stage}
+  prefix: menkui
+
 provider:
   name: aws
   runtime: python3.8
   region: ap-northeast-1
   profile: yadayuki
-
-
+  deploymentBucket:
+    name: ${cf:${self:custom.prefix}-${self:custom.stage}-s3.ServerlessBucket}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+       - "s3:ListBucket"
+      Resource:
+        - "arn:aws:s3:::${cf:${self:custom.prefix}-${self:custom.stage}-s3.ServerlessImageBucket}"
+    - Effect: "Allow"
+      Action:
+        - "s3:PutObject"
+        - "s3:GetObject"
+      Resource:
+        - "arn:aws:s3:::${cf:${self:custom.prefix}-${self:custom.stage}-s3.ServerlessImageBucket}/*"
+   
 plugins:
   - serverless-python-requirements
   - serverless-dotenv-plugin
   - serverless-offline
 
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
-
-# you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-#            - "/*"
-
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
-
-# you can add packaging information here
 
 
-# TODO:add lambda port
 
 functions:
-  hello:
-    handler: handler.hello
-#    The following are a few example events you can configure
-#    NOTE: Please make sure to change your handler code to work with those events
-#    Check the event documentation for details
+  get_menkui:
+    handler: handler.get_menkui
     events:
       - http:
           path: /

@@ -1,4 +1,11 @@
 {
+  "name":"menkui-api",
+  "version":"0.1.0",
+  "description":"serverless api for menkui camera",
+  "scripts": {
+    "start":"serverless offline start",
+    "deploy":"serverless deploy"
+  },
   "devDependencies": {
     "serverless-offline": "^6.8.0"
   },

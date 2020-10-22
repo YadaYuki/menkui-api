@@ -23,6 +23,8 @@ provider:
   profile: yadayuki
   deploymentBucket:
     name: ${cf:${self:custom.prefix}-${self:custom.stage}-s3.ServerlessBucket}
+  environment: 
+    IMAGE_BUCKET_NAME: ${self:custom.prefix}-${self:custom.stage}-serverless-image
   iamRoleStatements:
     - Effect: "Allow"
       Action:

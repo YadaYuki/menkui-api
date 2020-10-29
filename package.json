@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "serverless api for menkui camera",
   "scripts": {
-    "start": "sls wsgi serve",
+    "start": "IS_LOCAL=true sls wsgi serve",
     "deploy": "serverless deploy"
   },
   "devDependencies": {

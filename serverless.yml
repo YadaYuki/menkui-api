@@ -14,6 +14,8 @@ provider:
   deploymentBucket:
     name: ${cf:${self:custom.prefix}-${self:custom.stage}-s3.ServerlessBucket}
   environment: 
+    PROFILE_NAME: ${self:provider.profile}
+    ENV: ${self:custom.stage}
     IMAGE_BUCKET_NAME: ${self:custom.prefix}-${self:custom.stage}-serverless-image
   iamRoleStatements:
     - Effect: "Allow"

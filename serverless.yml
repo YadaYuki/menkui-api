@@ -5,12 +5,6 @@
 
 service: menkui-api
 # app and org for use with dashboard.serverless.com
-#app: your-app-name
-#org: your-org-name
-
-# You can pin your service to only deploy with a specific Serverless version
-# Check out our docs for more details
-# frameworkVersion: "=X.X.X"
 
 provider:
   name: aws
@@ -95,3 +89,5 @@ custom:
   prefix: menkui
   wsgi:
     app: api.app
+  pythonRequirements:
+    dockerizePip: true

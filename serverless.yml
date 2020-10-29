@@ -12,10 +12,6 @@ service: menkui-api
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
-custom:
-  stage: ${opt:stage,self:provider.stage}
-  prefix: menkui
-
 provider:
   name: aws
   runtime: python3.8
@@ -42,17 +38,14 @@ plugins:
   - serverless-python-requirements
   - serverless-dotenv-plugin
   - serverless-offline
-
-
-
+  - serverless-wsgi
 
 functions:
-  get_menkui:
-    handler: handler.get_menkui
+  api:
+    handler: wsgi_handler.handler
     events:
-      - http:
-          path: /
-          method: get
+      - http: ANY /
+      - http: ANY {proxy+}
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
@@ -97,3 +90,8 @@ functions:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
+custom:
+  stage: ${opt:stage,self:provider.stage}
+  prefix: menkui
+  wsgi:
+    app: api.app

@@ -1,13 +1,14 @@
 {
-  "name":"menkui-api",
-  "version":"0.1.0",
-  "description":"serverless api for menkui camera",
+  "name": "menkui-api",
+  "version": "0.1.0",
+  "description": "serverless api for menkui camera",
   "scripts": {
-    "start":"serverless offline start",
-    "deploy":"serverless deploy"
+    "start": "sls wsgi serve",
+    "deploy": "serverless deploy"
   },
   "devDependencies": {
-    "serverless-offline": "^6.8.0"
+    "serverless-offline": "^6.8.0",
+    "serverless-wsgi": "^1.7.6"
   },
   "dependencies": {
     "serverless-dotenv-plugin": "^3.1.0",

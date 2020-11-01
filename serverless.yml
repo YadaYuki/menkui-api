@@ -90,6 +90,6 @@ custom:
   stage: ${opt:stage,self:provider.stage}
   prefix: menkui
   wsgi:
-    app: routes.api.app
+    app: api.app
   pythonRequirements:
     dockerizePip: true
